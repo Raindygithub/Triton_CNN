@@ -1,1 +1,11 @@
 # Triton_CNN
+流水线数据加载加载：采用DALI流水线加载数据，通过锁页内存和数据预取加速数据加载。
+Triton内核设计：设计基于triton的融合卷积层、池化层与全连接层、relu函数等的内核，避免多次内核调用和全局内存访问。
+自动混合精度：在训练阶段采用自动混合精度，减少显存占用并加速计算
+动态并行与批处理优化：根据不同的输入尺寸，动态选择相应的BLOCK_SIZE和warp数量，最大化GPU利用率
+
+train_vx.py对应不同版本训练过程
+model_vx.py对应不同版本模型
+
+softmax.py为利用triton优化softmax算子
+matmul.py为triton优化矩阵乘法
